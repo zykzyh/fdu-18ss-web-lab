@@ -125,8 +125,65 @@
             <th>Price</th>
             <th>Amount</th>
          </tr>
-
          <!-- 这是你需要修改的地方 -->
+          <script>
+              var file = ['116010.jpg','113010.jpg'];
+              var price = [500,700];
+              var quantity = [2,1];
+              var product = ['Artist Holding a Thistle','Self-portrait in a Straw Hat'];
+              for(var i = 0; i < price.length ; i++)
+              {
+                  document.write(          "<tr>" +
+                      "<td><img class='img-thumbnail' src=" + 'images/art/tiny/'+ file[i] + " alt='...'></td>"+
+                      "<td>" + product[i] + "</td>"+
+                      "<td>" + quantity[i] + "</td>"+
+                      "<td>$" + price[i] + "</td>"+
+                      "<td>$" + (price[i] * quantity[i]) + "</td>"+
+                      "</tr>");
+              }
+              var subTotal = function()
+              {
+                  var sum = 0;
+                  for(var i = 0; i < price.length ; i ++)
+                      sum += price[i] * quantity[i];
+                  return sum;
+              }
+              var tax = function()
+              {
+                  return subTotal()*0.1;
+              }
+              var shipping = function()
+              {
+                  if (subTotal() <= 1000) {
+                      return 40;
+                  }
+                  else {
+                      return 0;
+                  }
+              }
+              var grandTotal = function()
+              {
+                  return subTotal() + tax() + shipping();
+              }
+              document.write(
+                  "<tr class='success strong'>" +
+                  "<td colspan='4' class='moveRight'>Subtotal</td>" +
+                  "<td >" + '$'+subTotal() +"</td>" +
+                  "</tr>" +
+                  "<tr class='active strong'>" +
+                  "<td colspan='4' class='moveRight'>Tax</td>" +
+                  "<td>" +'$'+ tax() + "</td>" +
+                  "</tr>  " +
+                  "<tr class='strong'>" +
+                  "<td colspan='4' class='moveRight'>Shipping</td>" +
+                  "<td>" + '$'+shipping() + "</td>" +
+                  "</tr> " +
+                  "<tr class='warning strong text-danger'>" +
+                  "<td colspan='4' class='moveRight'>Grand Total</td>" +
+                  "<td>" + '$'+grandTotal() + "</td>" +
+                  "</tr>"    );
+
+          </script>
          <!-- 本来是下面这样👇 -->
 
          <!-- <tr>
@@ -178,6 +235,13 @@
             <td colspan="4" class="moveRight"><button type="button" class="btn btn-primary" >Continue Shopping</button></td>
             <td><button type="button" class="btn btn-success" >Checkout</button></td>
          </tr>
+          <!--这里是把原来固定的值删除掉-->
+          <script>
+              var x= document.getElementsByTagName('tr');
+              for(var i=7;i<x.length;i++){
+                  x[i].innerHTML='';
+              }
+          </script>
       </table>         
 
 </div>  <!-- end container -->
