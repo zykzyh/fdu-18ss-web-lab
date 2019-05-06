@@ -31,6 +31,8 @@ window.onload=function (){
 
     //淡入效果函数
     function fadeIn(t){
+       /* t.style.transition="0.8s";
+        t.style.opacity=0.8;*/
         var fig=0;
         var temp=0;
         var show = self.setInterval(function () {
