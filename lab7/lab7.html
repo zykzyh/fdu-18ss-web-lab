@@ -4,7 +4,7 @@
 <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="lab7.css">
-<script>
+<script src="http://code.jquery.com/jquery-3.1.0.min.js">
 </script>      
 </head>    
 <body class="tiled">
@@ -39,7 +39,53 @@
     </div>
 </main>
 <script>
-
-</script>    
-</body>   
+    $(document).ready(function () {
+        $("#thumbBox").bind("click",function (e) {
+            let target=e.target;
+            $("#imgManipulated img").attr("src",function () {
+                var src=target.src.toString();
+                let path=/[a-z0-9]+\.jpg$/.exec(src).toString();
+                let path1="images/medium/"+path;
+                return path1;
+                }
+            );
+            $("#imgManipulated figcaption em").html(target.alt.toString());
+            $("#imgManipulated figcaption p").html(target.title.toString());
+        });
+        $("#sliderOpacity").bind("input propertychange",function (e) {
+            let target=e.target;
+            $("#numOpacity").html(target.value.toString());
+            $("#imgManipulated img").css({"filter":"opacity("+target.value/100+")","-webkit-filter":"opacity("+target.value/100+")"});
+        })
+        $("#sliderSaturation").bind("input propertychange",function (e) {
+            let target=e.target;
+            $("#numSaturation").html(target.value.toString());
+            $("#imgManipulated img").css({"filter":"saturate("+target.value/100+")","-webkit-filter":"saturate("+target.value/100+")"});
+        })
+        $("#sliderBrightness").bind("input propertychange",function (e) {
+            let target=e.target;
+            $("#numBrightness").html(target.value.toString());
+            $("#imgManipulated img").css({"filter":"brightness("+target.value/100+")","-webkit-filter":"brightness("+target.value/100+")"});
+        })
+        $("#sliderHue").bind("input propertychange",function (e) {
+            let target=e.target;
+            $("#numHue").html(target.value.toString());
+            $("#imgManipulated img").css({"filter":"hue-rotate("+target.value+"deg)","-webkit-filter":"hue-rotate("+target.value+"deg)"});
+        })
+        $("#sliderGray").bind("input propertychange",function (e) {
+            let target=e.target;
+            $("#numGray").html(target.value.toString());
+            $("#imgManipulated img").css({"filter":"grayscale("+target.value/100+")","-webkit-filter":"grayscale("+target.value/100+")"});
+        })
+        $("#sliderBlur").bind("input propertychange",function (e) {
+            let target=e.target;
+            $("#numBlur").html(target.value.toString());
+            $("#imgManipulated img").css({"filter":"blur("+target.value+")","-webkit-filter":"blur("+target.value+")"});
+        })
+        $("#resetFilters").bind("click",function (e) {
+            $("#imgManipulated img").css({"filter":"none","-webkit-filter":"none"});
+        })
+    });
+</script>
+</body>
 </html>
